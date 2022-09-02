@@ -8,6 +8,7 @@
 //! statement shows, it is assumed that it is an unsigned 
 //! circuit and therefore it is appropriate to speak of Carry and not Overflow.
 
+
 module uns_acc
 (
     output reg [5:0] o_data , //! Acc output
