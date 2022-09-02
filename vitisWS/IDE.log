@@ -1,0 +1,16 @@
+13:37:24 INFO  : Launching XSCT server: xsct.bat -n  -interactive C:\Users\LENOVO\Desktop\DDA\vitisWS\temp_xsdb_launch_script.tcl
+13:37:25 INFO  : Registering command handlers for Vitis TCF services
+13:37:27 INFO  : Platform repository initialization has completed.
+13:37:27 INFO  : XSCT server has started successfully.
+13:37:28 INFO  : plnx-install-location is set to ''
+13:37:28 INFO  : Successfully done setting XSCT server connection channel  
+13:37:28 INFO  : Successfully done query RDI_DATADIR 
+13:37:28 INFO  : Successfully done setting workspace for the tool. 
+20:11:12 INFO  : Launching XSCT server: xsct.bat -n  -interactive C:\Users\LENOVO\Desktop\DDA\vitisWS\temp_xsdb_launch_script.tcl
+20:11:13 INFO  : Registering command handlers for Vitis TCF services
+20:11:15 INFO  : Platform repository initialization has completed.
+20:11:15 INFO  : XSCT server has started successfully.
+20:11:15 INFO  : plnx-install-location is set to ''
+20:11:16 INFO  : Successfully done setting XSCT server connection channel  
+20:11:16 INFO  : Successfully done query RDI_DATADIR 
+20:11:16 INFO  : Successfully done setting workspace for the tool. 
