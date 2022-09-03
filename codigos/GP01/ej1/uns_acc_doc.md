@@ -8,6 +8,9 @@
 - **Details:** Given the extension of the input word that the 
  statement shows, it is assumed that it is an unsigned 
  circuit and therefore it is appropriate to speak of Carry and not Overflow.
+
+## Target circuit
+![circuit](xtras/target_circuit.png)
 ## Diagram
 
 ![Diagram](uns_acc_doc.svg "Diagram")
