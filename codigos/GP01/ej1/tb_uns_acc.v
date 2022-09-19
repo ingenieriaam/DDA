@@ -26,55 +26,49 @@ module uns_acc_tb;
 
     // generate the clock
     initial begin
-    tbclk = 1'b0;
+    tbclk = 1'b1;
     forever #1 tbclk = ~tbclk;
     end
     
-    // Generate the reset
-    initial begin
-        tbi_rst_n = 1'b0;
-        #10
-        tbi_rst_n = 1'b1;
-    end
 
 
 // Test stimulus
   initial begin
     // Use the monitor task to display the FPGA IO
     $monitor("Init test stimulus");
+    tbi_sel   = 2'b00 ;
     tbi_data1 = 3'b001;
-    tbi_data2 = 3'b010;
+    tbi_data2 = 3'b010;    
+    tbi_rst_n = #10 1'b0;
+    tbi_rst_n = 1'b1;
     $monitor("time=%3d, i_sel=%2b, i_data1=%d, i_data1=%d \n",$time, tbi_sel, tbi_data1, tbi_data2);
     // Generate each input with a 20 ns delay between them
     tbi_sel   = 2'b00 ;
-    #10
     if (o_data != 'd20) begin
-        $monitor("o_data should be 40, and was %d",o_data);        
+      $monitor("i_sel=%d :o_data should be 20, and was %d",tbi_sel,o_data);        
     end
+    #20 
     //---------------------------
     $monitor("reset register"); 
     tbi_rst_n = 1'b0;
-    #10
+    #5
+    tbi_sel   = 2'b01;
     tbi_rst_n = 1'b1;
-    tbi_sel   = 2'b01 ;
-    #10
     if (o_data != 'd30) begin
-        $monitor("o_data should be 40, and was %d",o_data);        
+        $monitor("i_sel=%d :o_data should be 10, and was %d",tbi_sel,o_data);        
     end
     //---------------------------
     $monitor("reset register"); 
     tbi_rst_n = 1'b0;
-    #10
+    #5
+    tbi_sel   = 2'b01;
     tbi_rst_n = 1'b1;
-    tbi_sel   = 2'b10 ;
-    #10
     if (o_data != 'd10) begin
-        $monitor("o_data should be 40, and was %d",o_data);        
+        $monitor("i_sel=%d :o_data should be 30, and was %d",tbi_sel,o_data);        
     end
-    tbi_sel   = 2'b11 ;
-    #20
+    tbi_sel   = #20 2'b11 ;
     if (o_data != 'd10) begin
-        $monitor("o_data should be 40, and was %d",o_data);        
+        $monitor("i_sel=%d :o_data should be 33, and was %d",tbi_sel,o_data);        
     end
     
     $monitor("End test");
