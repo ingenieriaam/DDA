@@ -44,7 +44,7 @@ module uns_acc_tb;
     $monitor("Init test stimulus");
     tbi_data1 = 3'b001;
     tbi_data2 = 3'b010;
-    $monitor("time=%3d, i_sel=%2b, i_data1=%3b, i_data1=%3b \n",$time, tbi_sel, tbi_data1, tbi_data2);
+    $monitor("time=%3d, i_sel=%2b, i_data1=%d, i_data1=%d \n",$time, tbi_sel, tbi_data1, tbi_data2);
     // Generate each input with a 20 ns delay between them
     tbi_sel   = 2'b00 ;
     #10
