@@ -9,10 +9,13 @@ module compuertasLogicas
     input wire ent1, ent2, ent3, 
     input wire act,
     input wire [2:0]sel, 
-    output reg sal 
+    output wire sal 
 ); 
+
+reg pre_sal;
+
 always@(*)begin 
-    sal =   (sel == 3'b001) ?  ( ent1 & ent2 & ent3 ): //AND 
+    pre_sal=(sel == 3'b001) ?  ( ent1 & ent2 & ent3 ): //AND 
             (sel == 3'b010) ?  ( ent1 | ent2 | ent3 ): //OR 
             (sel == 3'b011) ?  ( ent1 ^ ent2 ^ ent3 ): //XOR 
             (sel == 3'b100) ? !( ent1 & ent2 & ent3 ): //NAND 
@@ -20,5 +23,7 @@ always@(*)begin
             (sel == 3'b110) ? !( ent1 ^ ent2 ^ ent3 ): //XNOR 
                                                (1'b0); //Default 
 end
+
+assign sal=(act == 1'b1) ? pre_sal : (1'b0);
 
 endmodule
