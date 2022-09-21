@@ -7,7 +7,7 @@
 //! @details Given the extension of the input word that the 
 //! statement shows, it is assumed that it is an unsigned 
 //! circuit and therefore it is appropriate to speak of Carry and not Overflow.
-
+`define COCOTB_SIM 1
 
 module uns_acc
 (
@@ -58,5 +58,14 @@ module uns_acc
     end
 
     assign o_carry = adder_out[6];
+
+    /* for cocotb sim*/
+    `ifdef COCOTB_SIM
+    initial begin
+      $dumpfile ("uns_acc.vcd");
+      $dumpvars (0, uns_acc);
+      #1;
+    end
+    `endif
 
 endmodule
