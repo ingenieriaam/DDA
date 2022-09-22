@@ -26,11 +26,30 @@ ___
 
 > https://docs.cocotb.org/en/stable/
 
+### <img src="https://upload.wikimedia.org/wikipedia/commons/7/79/Docker_%28container_engine%29_logo.png" alt="drawing" width="80"/> : Automation of application deployment within software containers
+> A container is provided with what is necessary for the implementation of HW with the tools mentioned above.
+
+### Use:
+
+Standing on the working folder, example GP01 of this repository.
+```bash
+docker run --rm -v $PWD:/project -w /project -it andresdemski/spl2019:cocotb
+./docker_env.sh
+```
+
+> https://www.docker.com/products/docker-desktop/
+
 ___
 ## FPGA board
 [Artix-35T](https://www.xilinx.com/products/boards-and-kits/arty.html)
 
 ![arty7](https://www.xilinx.com/content/xilinx/en/products/boards-and-kits/arty/_jcr_content/root/fullParsys/xilinxflexibleslab_1141911343/xilinxflexibleslab-parsys/xilinxtabs/childParsys-specifications/xilinximage.img.png/1503511073525.png)
+
+## Utils
+For explore some git repo online with vscode (on navigator), use prefix vscode.dev/
+
+ex:
+> https://vscode.dev/github/cocotb/cocotb/tree/2f695a6aeaf4e89aa8c68ea931502ec89c3ca488/examples
 
 # Notes:
 
