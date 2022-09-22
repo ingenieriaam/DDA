@@ -1,11 +1,13 @@
 <testsuites name="results">
   <testsuite name="all" package="all">
-    <property name="random_seed" value="1663730726" />
-    <testcase name="one_increment_sel0" classname="uns_acc_tb" file="/home/aortiz/DDA/codigos/GP01/ej1/uns_acc_tb.py" lineno="29" time="0.021995067596435547" sim_time_ns="3380.001" ratio_time="153670.86212309494" />
-    <testcase name="random_increment_sel1" classname="uns_acc_tb" file="/home/aortiz/DDA/codigos/GP01/ej1/uns_acc_tb.py" lineno="56" time="0.003858327865600586" sim_time_ns="800.0010000000002" ratio_time="207343.96553815738">
+    <property name="random_seed" value="1663799014" />
+    <testcase name="one_increment_sel0" classname="uns_acc_tb" file="/home/aortiz/DDA/codigos/GP01/ej1/uns_acc_tb.py" lineno="29" time="0.016870498657226562" sim_time_ns="3380.001" ratio_time="200349.79811057096" />
+    <testcase name="random_increment_sel1" classname="uns_acc_tb" file="/home/aortiz/DDA/codigos/GP01/ej1/uns_acc_tb.py" lineno="56" time="0.0036420822143554688" sim_time_ns="800.0010000000002" ratio_time="219654.84382717995">
       <failure />
     </testcase>
-    <testcase name="random_increment_sel2" classname="uns_acc_tb" file="/home/aortiz/DDA/codigos/GP01/ej1/uns_acc_tb.py" lineno="87" time="0.039023637771606445" sim_time_ns="3360.2569999999996" ratio_time="86108.24597303224" />
-    <testcase name="null_increment_sel3" classname="uns_acc_tb" file="/home/aortiz/DDA/codigos/GP01/ej1/uns_acc_tb.py" lineno="117" time="0.035627126693725586" sim_time_ns="3360.2569999999996" ratio_time="94317.37307605516" />
+    <testcase name="random_increment_sel2" classname="uns_acc_tb" file="/home/aortiz/DDA/codigos/GP01/ej1/uns_acc_tb.py" lineno="87" time="0.029691696166992188" sim_time_ns="3280.249" ratio_time="110476.98257287852">
+      <failure />
+    </testcase>
+    <testcase name="null_increment_sel3" classname="uns_acc_tb" file="/home/aortiz/DDA/codigos/GP01/ej1/uns_acc_tb.py" lineno="117" time="0.03144717216491699" sim_time_ns="3360.2569999999996" ratio_time="106854.0275220282" />
   </testsuite>
 </testsuites>
