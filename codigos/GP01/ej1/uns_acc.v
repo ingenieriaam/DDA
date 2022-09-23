@@ -59,7 +59,9 @@ module uns_acc
 
     assign o_carry = adder_out[6];
 
+    /*===============*/
     /* for cocotb sim*/
+    /*===============*/
     `ifdef COCOTB_SIM
     initial begin
       $dumpfile ("uns_acc.vcd");

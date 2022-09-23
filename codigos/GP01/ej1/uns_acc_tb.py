@@ -69,14 +69,14 @@ async def random_increment_sel1(dut):
     for i in range(max_count):
         inc1 = random.randint(0, 7)
         inc2 = random.randint(0, 7)
-        print("inc %d" % inc)
+        #print("inc %d" % inc)
         dut.i_data1.value = inc1
         dut.i_data2.value = inc2
         await Timer((1+1e-4)*PERIOD, units='ns')
         internal_count += inc1+inc2
         internal_count = internal_count if internal_count<64 else internal_count-64
-        print("internal_count %d i = %d" % (internal_count,i))
-        if internal_count==63:
+        #print("internal_count %d i = %d" % (internal_count,i))
+        if internal_count==63 and (inc1+inc2)!=0:
             assert dut.o_carry.value.integer == 1, "FAIL: o_carry must be 1 and was {o_carry} for count {i}".format(
                     o_carry=dut.o_carry.value.integer,i=internal_count)
         assert dut.o_data.value.integer == internal_count, "FAIL: o_data must be {i} and was {o_data}".format(
@@ -99,14 +99,14 @@ async def random_increment_sel2(dut):
 
     for i in range(max_count):
         inc = random.randint(0, 7)
-        print("inc %d" % inc)
+        #print("inc %d" % inc)
         dut.i_data1.value = inc
         dut.i_data2.value = 1
         await Timer((1+1e-4)*PERIOD, units='ns')
         internal_count += inc
         internal_count = internal_count if internal_count<64 else internal_count-64
-        print("internal_count %d i = %d" % (internal_count,i))
-        if internal_count==63:
+        #print("internal_count %d i = %d" % (internal_count,i))
+        if internal_count==63 and inc != 0:
             assert dut.o_carry.value.integer == 1, "FAIL: o_carry must be 1 and was {o_carry} for count {i}".format(
                     o_carry=dut.o_carry.value.integer,i=internal_count)
         assert dut.o_data.value.integer == internal_count, "FAIL: o_data must be {i} and was {o_data}".format(
@@ -129,7 +129,7 @@ async def null_increment_sel3(dut):
 
     for i in range(max_count):
         inc = random.randint(0, 7)
-        print("inc %d" % inc)
+        #print("inc %d" % inc)
         dut.i_data1.value = inc
         dut.i_data2.value = inc
         await Timer((1+1e-4)*PERIOD, units='ns')

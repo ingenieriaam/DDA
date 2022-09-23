@@ -1,15 +1,9 @@
 <testsuites name="results">
   <testsuite name="all" package="all">
-    <property name="random_seed" value="1663808154" />
-    <testcase classname="uns_acc_tb" file="/project/GP01/ej1/uns_acc_tb.py" lineno="29" name="one_increment_sel0" ratio_time="127307.27991945513" sim_time_ns="820.001" time="0.0064411163330078125">
-      <failure />
-    </testcase>
-    <testcase classname="uns_acc_tb" file="/project/GP01/ej1/uns_acc_tb.py" lineno="56" name="random_increment_sel1" ratio_time="128635.13108315124" sim_time_ns="800.001" time="0.006219148635864258">
-      <failure />
-    </testcase>
-    <testcase classname="uns_acc_tb" file="/project/GP01/ej1/uns_acc_tb.py" lineno="87" name="random_increment_sel2" ratio_time="117215.65888187583" sim_time_ns="820.0030000000002" time="0.006995677947998047">
-      <failure />
-    </testcase>
-    <testcase classname="uns_acc_tb" file="/project/GP01/ej1/uns_acc_tb.py" lineno="117" name="null_increment_sel3" ratio_time="47636.86913536716" sim_time_ns="3360.2569999999996" time="0.07053899765014648" />
+    <property name="random_seed" value="1663966311" />
+    <testcase name="one_increment_sel0" classname="uns_acc_tb" file="/home/aortiz/DDA/codigos/GP01/ej1/uns_acc_tb.py" lineno="29" time="0.01781320571899414" sim_time_ns="3380.001" ratio_time="189746.92446267098" />
+    <testcase name="random_increment_sel1" classname="uns_acc_tb" file="/home/aortiz/DDA/codigos/GP01/ej1/uns_acc_tb.py" lineno="56" time="0.01893901824951172" sim_time_ns="3360.2569999999996" ratio_time="177425.08907961124" />
+    <testcase name="random_increment_sel2" classname="uns_acc_tb" file="/home/aortiz/DDA/codigos/GP01/ej1/uns_acc_tb.py" lineno="87" time="0.018599987030029297" sim_time_ns="3360.2569999999996" ratio_time="180659.10447006946" />
+    <testcase name="null_increment_sel3" classname="uns_acc_tb" file="/home/aortiz/DDA/codigos/GP01/ej1/uns_acc_tb.py" lineno="117" time="0.021625757217407227" sim_time_ns="3360.2570000000014" ratio_time="155382.16610030323" />
   </testsuite>
 </testsuites>
