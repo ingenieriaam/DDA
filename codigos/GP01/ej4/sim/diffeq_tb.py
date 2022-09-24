@@ -27,7 +27,10 @@ async def trivial_test(dut):
     for repetitions in range(16):
         # Generate random input vector
         x=[]
-        x = [random.randint(0, int(math.pow(2,15))) for x in range(4)]
+        min= -1*int(math.pow(2,15)//2)
+        max=int((math.pow(2,15)//2)-1)
+        dut._log.debug("Min = %d | Max = %d" %(min,max))
+        x = [random.randint(min, max) for x in range(4)]
         # Take the output vector with the filter model
         y_result=[0,0,0,0]
         y_expected=mod.diffeq_model(x,y_result)
@@ -37,10 +40,11 @@ async def trivial_test(dut):
             await Timer(PERIOD, units='ns')
             y_result[i]=dut.o_y.value.integer
         # Automatic results check
-        print(" y_expected: {ye}\n y_result: {yr}".format(ye=y_expected ,yr=y_result))
+        dut._log.debug(" y_expected: {ye}\n y_result: {yr}".format(ye=y_expected ,yr=y_result))
         for i in range(4):
             assert y_result[i] == y_expected[i], "FAIL: o_y[{i}] must be {esp} and was {o_y}".format(
                             i=i,esp=y_expected[i],o_y=dut.o_y.value.integer)
+        dut._log.info("test instance n°: %d | PASS" %repetitions)
 
 """ # Register the test.
 factory = TestFactory(run_test)

@@ -1,6 +1,8 @@
 <testsuites name="results">
   <testsuite name="all" package="all">
-    <property name="random_seed" value="1664035129" />
-    <testcase name="trivial_test" classname="diffeq_tb" file="/home/aortiz/DDA/codigos/GP01/ej4/sim/diffeq_tb.py" lineno="20" time="0.012878179550170898" sim_time_ns="840.001" ratio_time="65226.688036730535" />
+    <property name="random_seed" value="1664059910" />
+    <testcase name="trivial_test" classname="diffeq_tb" file="/home/aortiz/DDA/codigos/GP01/ej4/sim/diffeq_tb.py" lineno="22" time="0.0035276412963867188" sim_time_ns="240.001" ratio_time="68034.4116182752">
+      <failure />
+    </testcase>
   </testsuite>
 </testsuites>
