@@ -19,7 +19,7 @@ run_v:
 	vvp mydesign_synth
 
 run_coco:
-	$(MAKE) -f $(shell cocotb-config --makefiles)/Makefile.sim SIM=$(SIM) TOPLEVEL_LANG=$(TOPLEVEL_LANG) VERILOG_SOURCES=$(VERILOG_SOURCES) TOPLEVEL=$(TOPLEVEL) MODULE=$(MODULE)
+	$(MAKE) -f $(shell cocotb-config --makefiles)/Makefile.sim SIM=$(SIM) TOPLEVEL_LANG=$(TOPLEVEL_LANG) VERILOG_SOURCES=$(VERILOG_SOURCES) TOPLEVEL=$(TOPLEVEL) MODULE=$(MODULE) WAVES=$(WAVES)
 
 waves:
 	gtkwave *.vcd $(GTK_ARGS)

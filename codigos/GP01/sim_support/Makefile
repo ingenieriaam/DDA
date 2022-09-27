@@ -5,9 +5,11 @@ GTK_ARGS = --rcvar 'fontname_signals Monospace 16' --rcvar 'fontname_waves Monos
 SIM ?= icarus
 TOPLEVEL_LANG ?= verilog
 
-VERILOG_SOURCES += $(tle).v
+VERILOG_SOURCES += ../rtl/$(tle).v
 TOPLEVEL = $(tle)
 MODULE = $(tle)_tb
+# can be TRACE, DEBUG, INFO, WARNING, ERROR, CRITICAL.
+LOG=INFO
 WAVES = 1
 ###################################################################################################
 # RULES
@@ -19,7 +21,7 @@ run_v:
 	vvp mydesign_synth
 
 run_coco:
-	$(MAKE) -f $(shell cocotb-config --makefiles)/Makefile.sim SIM=$(SIM) TOPLEVEL_LANG=$(TOPLEVEL_LANG) VERILOG_SOURCES=$(VERILOG_SOURCES) TOPLEVEL=$(TOPLEVEL) MODULE=$(MODULE) WAVES=$(WAVES)
+	$(MAKE) -f $(shell cocotb-config --makefiles)/Makefile.sim SIM=$(SIM) TOPLEVEL_LANG=$(TOPLEVEL_LANG) VERILOG_SOURCES=$(VERILOG_SOURCES) TOPLEVEL=$(TOPLEVEL) MODULE=$(MODULE) COCOTB_LOG_LEVEL=$(LOG)
 
 waves:
 	gtkwave *.vcd $(GTK_ARGS)
