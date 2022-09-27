@@ -16,8 +16,10 @@ WAVES = 1
 ###################################################################################################
 all: help
 
+check:
+	iverilog -o mydesign_synth $(VERILOG_SOURCES)
 run_v:
-	iverilog -o mydesign_synth $(tle).v $(tle)_tb.v
+	iverilog -o mydesign_synth $(VERILOG_SOURCES) $(MODULE).v
 	vvp mydesign_synth
 
 run_coco:
@@ -39,6 +41,8 @@ help:
 	@echo "    Se espera que el modulo y testBench tengan la forma:					"
 	@echo "    MyModule.v 															"
 	@echo "    MyModule_tb.v 														"
+	@echo "                                                                         "
+	@echo "    check : Corre un chequeo de sintaxis con icarus                      "
 	@echo "                                                                         "
 	@echo "    run_v : Simula la entidad de mayor jerarquía con Icarus.             "
 	@echo "            Sólo válido para ejercicios que tienen TB disponible.        "
