@@ -5,5 +5,5 @@ all:
 	$(shell mkdir -p $(proj)/rtl)
 	$(shell mkdir -p $(proj)/sim)
 	$(shell mkdir -p $(proj)/xtras)
-	$(shell ln -s ../../sim_support/Makefile $(proj)/sim/Makefile)
-	@echo "Estructura de carpetas creada"
+	$(shell ln -s ../sim_support/Makefile $(proj)/Makefile)
+	@echo "Estructura creada"

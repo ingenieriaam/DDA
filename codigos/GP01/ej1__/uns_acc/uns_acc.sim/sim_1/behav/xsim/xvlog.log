@@ -1,4 +1,0 @@
-INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/LENOVO/Desktop/DDA/codigos/GP01/ej1/uns_acc.v" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module uns_acc
-INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/LENOVO/Desktop/DDA/codigos/GP01/ej1/tb_uns_acc.v" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module uns_acc_tb
