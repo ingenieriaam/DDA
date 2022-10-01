@@ -1,0 +1,8 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1664246229" />
+    <testcase name="singular_values" classname="fpmul_tb" file="/home/aortiz/DDA/codigos/GP02/ej1/sim/fpmul_tb.py" lineno="14" time="0.002040863037109375" sim_time_ns="200.001" ratio_time="97998.24699813084">
+      <failure />
+    </testcase>
+  </testsuite>
+</testsuites>

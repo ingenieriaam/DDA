@@ -1,0 +1,40 @@
+$date
+	Mon Sep 26 23:37:09 2022
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module fpmul $end
+$var wire 1 ! Sign $end
+$var wire 13 " i_data1 [12:0] $end
+$var wire 13 # i_data2 [12:0] $end
+$var wire 1 $ sign $end
+$var wire 7 % Sum_exp [6:0] $end
+$var wire 1 & Nan_check $end
+$var wire 16 ' Mult_res [15:0] $end
+$var reg 4 ( Exponent [3:0] $end
+$var reg 8 ) Mantissa [7:0] $end
+$var reg 13 * o_mul [12:0] $end
+$scope begin exp_calc $end
+$upscope $end
+$scope begin trunc $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+bz100000000000 *
+b0 )
+b1000 (
+b0 '
+0&
+b1000 %
+1$
+b0 #
+b0 "
+z!
+$end
+#200001

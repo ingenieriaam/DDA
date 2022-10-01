@@ -17,11 +17,14 @@ async def singular_values(dut):
     await Timer(20*PERIOD, units='ns')
 
     singular=[float('nan'),float('inf'),-1.0*float('inf'),0.0]
-    dut.i_data1 = 1
-    dut.i_data2 = 1
-    dut.o_mul = 1
-
-    await Timer(20*PERIOD, units='ns')
+    for i in singular:
+        for j in singular:
+            dut._log.debug("%f = %f * %f\n" %(i*j,i,j))
+            dut.i_data1.value = i
+            dut.i_data2.value = j
+            await Timer(PERIOD, units='ns')
+            assert dut.o_mul.value == i*j, "FAIL: o_mul must be {out} and was {res}".format(
+                            out=dut.o_mul,res=i*j)
 
 """ # Register the test.
 factory = TestFactory(run_test)
