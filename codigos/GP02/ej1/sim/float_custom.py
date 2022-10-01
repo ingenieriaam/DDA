@@ -54,7 +54,7 @@ def bin2custom_float(num,exp_bits,mant_bits):
         custom_float= float('nan')
     else:
         custom_float=sign*f_mant*2**(f_exp)
-    return custom_float
+    return float(custom_float)
 
 def custom_float_rand(total_bits):
     bits=['0','1']

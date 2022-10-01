@@ -1,6 +1,8 @@
 <testsuites name="results">
   <testsuite name="all" package="all">
-    <property name="random_seed" value="1664653020" />
-    <testcase name="singular_values" classname="fpmul_tb" file="/home/aortiz/DDA/codigos/GP02/ej1/sim/fpmul_tb.py" lineno="17" time="0.021387100219726562" sim_time_ns="450.001" ratio_time="21040.767349326674" />
+    <property name="random_seed" value="1664655643" />
+    <testcase name="singular_values" classname="fpmul_tb" file="/home/aortiz/DDA/codigos/GP02/ej1/sim/fpmul_tb.py" lineno="17" time="0.009657859802246094" sim_time_ns="290.001" ratio_time="30027.46011415029">
+      <failure />
+    </testcase>
   </testsuite>
 </testsuites>

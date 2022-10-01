@@ -21,19 +21,20 @@ async def singular_values(dut):
 
     singular_float=[float('nan'),float('inf'),-1.0*float('inf'),0.0,-0.0]
     singular_bits =["1111110000000","0111100000000","1111100000000","0000000000000","1000000000000"]
+    
     for i in range(len(singular_bits)):
         for j in range(len(singular_bits)):
+
             dut.i_data1.value = int(singular_bits[i], 2)
             dut.i_data2.value = int(singular_bits[j], 2)
             await Timer(PERIOD, units='ns')
-            dut._log.info("data1= %s | data2= %s\n" %(singular_bits[i],singular_bits[j]))
-            dut._log.info("data1= %s | data2= %s\n" %(fc.bin2custom_float(singular_bits[i],4,8),fc.bin2custom_float(singular_bits[j],4,8)))
-            dut._log.info("result= %s\n" %(dut.o_mul.value))
-
+            
+            dut._log.info("data1= %s | data2= %s" %(fc.bin2custom_float(singular_bits[i],4,8),fc.bin2custom_float(singular_bits[j],4,8)))
             result=fc.bin2custom_float(dut.o_mul.value.binstr,4,8)
-            dut._log.info("result= %s\n" %(result))
-            """ assert dut.o_mul.value == i*j, "FAIL: o_mul must be {out} and was {res}".format(
-                            out=dut.o_mul,res=i*j) """
+            dut._log.info("result= %s => %s\n" %(result,dut.o_mul.value))
+
+            assert str(result) == str(singular_float[i]*singular_float[j]),"FAIL: o_mul must be {out} and was {res}".format(
+                            res=result,out=singular_float[i]*singular_float[j])
 
 """ # Register the test.
 factory = TestFactory(run_test)
