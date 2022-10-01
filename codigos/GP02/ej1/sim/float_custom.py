@@ -8,6 +8,7 @@ inf = -inf * -inf
 resto de los casos NaN
 """
 import numpy as np
+import random
 
 def values_reference():
     singular=[float('nan'),float('inf'),-1.0*float('inf'),0.0]
@@ -55,5 +56,8 @@ def bin2custom_float(num,exp_bits,mant_bits):
         custom_float=sign*f_mant*2**(f_exp)
     return custom_float
 
-def custom_float_rand(exp_bits,mant_bits):
-    
+def custom_float_rand(total_bits):
+    bits=['0','1']
+    randf = [random.choice(bits) for x in range(total_bits)]
+
+    return ''.join(randf)
