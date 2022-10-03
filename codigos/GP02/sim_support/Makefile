@@ -43,6 +43,7 @@ help:
 	@echo "    MyModule_tb.v 														"
 	@echo "                                                                         "
 	@echo "    check : Corre un chequeo de sintaxis con icarus                      "
+	@echo "            make check tle=<module>                                      "
 	@echo "                                                                         "
 	@echo "    run_v : Simula la entidad de mayor jerarquía con Icarus.             "
 	@echo "            Sólo válido para ejercicios que tienen TB disponible.        "

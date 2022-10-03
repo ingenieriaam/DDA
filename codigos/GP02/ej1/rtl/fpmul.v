@@ -5,11 +5,11 @@
 //!
 //! @brief Unsigned accumulator with adder input selection
 //! @details Multiplier of values whose format is: 
-//!      +------+----------+----------+
-//! bit  |  12  |  [11:8]  |   [7:0]  |
-//!      +------+----------+----------+
-//! data | Sign | Exponent | Mantissa |
-//!      +------+----------+----------+
+//!      
+//! |bits    |  12  |  [11:8]  |   [7:0]  |
+//! |---     |---   |---       |---       |
+//! |function| Sign | Exponent | Mantissa |
+//!      
 
 `define COCOTB_SIM 1
 `define bias 7
@@ -24,68 +24,50 @@ module fpmul
 //-----------arch-----------
 
     // Localparam
-    localparam  [7:0]  mant_zero   = {8{1'b0}};
-    localparam  [3:0]  exp_ones    = {4{1'b1}};
-    localparam  [13:0] nan_const   = {{6{1'b1}},{7{1'b0}}};
-    localparam  [13:0] zeroN_const = {{1'b1},{10{1'b0}}};
-    localparam  [13:0] zeroP_const = {{1'b0},{10{1'b0}}};
-    localparam  [13:0] infN_const  = {{1'b1},exp_ones,mant_zero};
-    localparam  [13:0] infP_const  = {{1'b0},exp_ones,mant_zero};
+    localparam  [12:0] nan         = {{6{1'b1}},{7{1'b0}}};     //! Nan representation
+    localparam  [11:0] inf         = {{4{1'b1}},{8{1'b0}}};     //! Inf representation
+    localparam  [11:0] zero        = {1'b0,{3{1'b1}},{8{1'b0}}};//! Zero representation
 
     /*vars*/
-    wire Sign;
-    reg         [3:0]  Exponent ;
-    reg         [7:0]  Mantissa ;
-    wire        [15:0] Mult_res ;
-    wire signed [6:0]  Sum_exp  ;
-    wire               Nan_check;
-    wire               Singular_val1;
-    wire               Singular_val2;
+    wire Sign;                    //! Calculation of sign of result
+    reg         [7:0]  Mantissa ; //! Truncation of multiplication
+    wire        [15:0] Mult_res ; //! Res of multiplication only
+    wire signed [6:0]  Sum_exp  ; //! Sum of exponent + bias
+    wire               Nan_check; //! Check if result must be NaN
+    wire              Zero_check; //! Check if result must be zero
 
     //! Sign 
-    assign sign = i_data1[12] ~^ i_data2[12];
+    assign Sign = i_data1[12] ^ i_data2[12];
 
     //! Mantissa
-    assign Mult_res = i_data1[7:0] * i_data2[7:0]; //! U(16.14)
-
-    always @(*) begin : trunc                      //! U(8.7) with rounding
-        if (Mult_res[7]) begin
-            Mantissa <= Mult_res[15:8]+1;
-        end
-        else begin
-            Mantissa <= Mult_res[15:8];
-        end
+    assign Mult_res = i_data1[7:0] * i_data2[7:0]; // U(16.14)
+    
+    //! Truncation, U(8.7) with rounding
+    always @(*) begin : trunc                      
+        if (Mult_res[7]) Mantissa <= Mult_res[15:8]+1;
+        else             Mantissa <= Mult_res[15:8];
     end
 
     //! Exponent
-    assign Sum_exp = i_data1[11:8] + i_data2[11:8] + `bias + 1; 
+    assign Sum_exp   = i_data1[11:8] + i_data2[11:8] + `bias; 
 
     //! Nan check
-    //! check if data1 is one of the problematic values
-    assign Singular_val1 =  (i_data1==zeroN_const || i_data1==zeroP_const) ? 1'b1 :  
-                            (i_data1==infN_const  || i_data1==infP_const ) ? 1'b1 :
-                            (i_data1==nan_const )                   ? 1'b1 : 1'b0 ;
-    //! check if data2 is one of the problematic values
-    assign Singular_val2 =  (i_data2==zeroN_const || i_data2==zeroP_const) ? 1'b1 :  
-                            (i_data2==infN_const  || i_data2==infP_const ) ? 1'b1 :
-                            (i_data2==nan_const )                   ? 1'b1 : 1'b0 ;
-    //! if both are problematic, it cannot be operated and the NaN indicator is generated
-    assign Nan_check     =  (Singular_val1 && Singular_val2)        ? 1'b1 : 1'b0 ;
-    
+    assign Nan_check = (i_data1==nan || i_data2==nan)              ? 1'b1 :
+                       (i_data1[11:0]==inf && i_data2[11:0]==zero) ? 1'b1 :
+                       (i_data2[11:0]==inf && i_data1[11:0]==zero) ? 1'b1 : 1'b0 ;
+    //! Zero check
+    assign Zero_check= (i_data1[11:0]==zero || i_data2[11:0]==zero) ? 1'b1 : 1'b0 ;
+
+    //! General operation
     always @(*) begin : exp_calc   
         // not a number 
-        if (Nan_check) begin                      
-            o_mul    <= nan_const;
-        end               
+        if (Nan_check)              o_mul <= nan;
+        // case zero
+        else if (Zero_check)        o_mul <= {Sign,zero};         
         // normal operation
-        else if (Sum_exp<6'b001111) begin 
-            Exponent = Sum_exp[3:0];
-            o_mul    <= {Sign,Exponent,Mantissa};
-        end
+        else if (Sum_exp<6'b001111) o_mul <= {Sign,Sum_exp[3:0],Mantissa};
         // +- inf
-        else begin                  
-            o_mul    <= {Sign,exp_ones,mant_zero};
-        end
+        else                        o_mul <= {Sign,inf};
     end
 
     /*===============*/
