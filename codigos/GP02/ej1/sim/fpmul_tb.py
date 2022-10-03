@@ -20,7 +20,7 @@ async def singular_values(dut):
     await Timer(20*PERIOD, units='ns')
 
     singular_float=[float('nan'),float('inf'),-1.0*float('inf'),0.0,-0.0]
-    singular_bits =["1111110000000","0111100000000","1111100000000","0000000000000","1000000000000"]
+    singular_bits =["1111110000000","0111100000000","1111100000000","0011100000000","1011100000000"]
     
     for i in range(len(singular_bits)):
         for j in range(len(singular_bits)):
@@ -29,9 +29,9 @@ async def singular_values(dut):
             dut.i_data2.value = int(singular_bits[j], 2)
             await Timer(PERIOD, units='ns')
             
-            dut._log.info("data1= %s | data2= %s" %(fc.bin2custom_float(singular_bits[i],4,8),fc.bin2custom_float(singular_bits[j],4,8)))
+            dut._log.debug("data1= %s | data2= %s" %(fc.bin2custom_float(singular_bits[i],4,8),fc.bin2custom_float(singular_bits[j],4,8)))
             result=fc.bin2custom_float(dut.o_mul.value.binstr,4,8)
-            dut._log.info("result= %s => %s\n" %(result,dut.o_mul.value))
+            dut._log.debug("result= %s => %s\n" %(result,dut.o_mul.value))
 
             assert str(result) == str(singular_float[i]*singular_float[j]),"FAIL: o_mul must be {out} and was {res}".format(
                             res=result,out=singular_float[i]*singular_float[j])
