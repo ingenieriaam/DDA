@@ -11,14 +11,14 @@ async def run_test(dut):
 
     dut.o_y.value = 0
     dut.i_x.value = 0
-    dut.i_rst.value = 0
-
-    await Timer(20*PERIOD, units='ns')
     dut.i_rst.value = 1
-    for i in range(4):
-        dut.i_x.value.integer = 1
+
+    await Timer(5*PERIOD, units='ns')
+    dut.i_rst.value = 0
+    for i in range(dut.NTAPS.value):
+        dut.i_x.value = 1
         await Timer(PERIOD, units='ns')
-        dut._log.info("Y[%d] = %d" %(i,dut.o_y.value.integer))
+        dut._log.info("Y @cycle %d = %d" %(i,dut.o_y.value.integer))
 
 
     
