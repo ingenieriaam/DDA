@@ -32,7 +32,7 @@ module fpmul
     wire Sign;                    //! Calculation of sign of result
     reg         [7:0]  Mantissa ; //! Truncation of multiplication
     wire        [15:0] Mult_res ; //! Res of multiplication only
-    wire signed [6:0]  Sum_exp  ; //! Sum of exponent + bias
+    wire signed [4:0]  Sum_exp  ; //! Sum of exponent + bias
     wire               Nan_check; //! Check if result must be NaN
     wire              Zero_check; //! Check if result must be zero
 
@@ -49,7 +49,7 @@ module fpmul
     end
 
     //! Exponent
-    assign Sum_exp   = i_data1[11:8] + i_data2[11:8] + `bias; 
+    assign Sum_exp   = i_data1[11:8] + i_data2[11:8] - `bias; 
 
     //! Nan check
     assign Nan_check = (i_data1==nan || i_data2==nan)              ? 1'b1 :
@@ -65,7 +65,7 @@ module fpmul
         // case zero
         else if (Zero_check)        o_mul <= {Sign,zero};         
         // normal operation
-        else if (Sum_exp<6'b001111) o_mul <= {Sign,Sum_exp[3:0],Mantissa};
+        else if (Sum_exp[4])        o_mul <= {Sign,Sum_exp[3:0],Mantissa};
         // +- inf
         else                        o_mul <= {Sign,inf};
     end

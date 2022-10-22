@@ -7,6 +7,9 @@ from plot_zplane import zplane
 
 b = np.array([1,-1,1,1])
 a = np.array([1,-0.5,-0.25,0])
+
+b = np.array([0,0,0,1])
+a = np.array([1,-0.5,0.25,0.5])
 #zplane(b,a)
 
 w, h = sp.signal.freqz(b, a, worN=512, whole=False, plot=None, fs=44100)

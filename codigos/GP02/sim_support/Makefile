@@ -17,7 +17,7 @@ WAVES = 1
 all: help
 
 check:
-	iverilog -o mydesign_synth $(VERILOG_SOURCES)
+	iverilog -Wall -o mydesign_synth $(VERILOG_SOURCES)
 run_v:
 	iverilog -o mydesign_synth $(VERILOG_SOURCES) $(MODULE).v
 	vvp mydesign_synth
