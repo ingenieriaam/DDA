@@ -15,9 +15,11 @@ async def run_test(dut):
 
     await Timer(5*PERIOD, units='ns')
     dut.i_rst.value = 0
+    dut._log.info("NTAPS: %d" %(dut.NTAPS.value))
     for i in range(dut.NTAPS.value):
         dut.i_x.value = 1
         await Timer(PERIOD, units='ns')
+        dut._log.info("inter for...")
         dut._log.info("Y @cycle %d = %f" %(i, (dut.o_y.value.signed_integer/2**15) ))
 
 

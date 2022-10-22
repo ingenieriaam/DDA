@@ -1,19 +1,20 @@
 $date
-	Wed Oct 19 22:33:35 2022
+	Sat Oct 22 16:28:03 2022
 $end
 $version
 	Icarus Verilog
 $end
 $timescale
-	1ps
+	1s
 $end
 $scope module fir_direct $end
 $var wire 1 ! clk $end
 $var wire 1 " i_rst $end
 $var wire 16 # i_x [15:0] $end
 $var wire 18 $ o_y [17:0] $end
-$var reg 32 % Mult_aux [31:0] $end
-$var integer 32 & idx [31:0] $end
+$var reg 32 % Mult_aux0 [31:0] $end
+$var reg 32 & Mult_aux1 [31:0] $end
+$var integer 32 ' idx [31:0] $end
 $scope begin coefficient_load $end
 $upscope $end
 $scope begin registers $end
@@ -22,44 +23,12 @@ $upscope $end
 $enddefinitions $end
 #0
 $dumpvars
-b0 &
+b100 '
+bx &
 bx %
-b0 $
-b0 #
-1"
-0!
-$end
-#5000
-b0 %
-b11 &
-1!
-#10000
-0!
-#15000
-b11 &
-1!
-#20000
-0!
-#25000
-b11 &
-1!
-#30000
-0!
-#35000
-b11 &
-1!
-#40000
-0!
-#45000
-b11 &
-1!
-#50000
-0"
-b1 #
-0!
-#55000
 bx $
-bx %
-b10 &
-1!
-#60001
+bz #
+z"
+z!
+$end
+#1

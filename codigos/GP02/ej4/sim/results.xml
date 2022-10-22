@@ -1,7 +1,7 @@
 <testsuites name="results">
   <testsuite name="all" package="all">
-    <property name="random_seed" value="1666229615" />
-    <testcase name="run_test" classname="fir_direct_tb" file="/home/aortiz/DDA/codigos/GP02/ej4/sim/fir_direct_tb.py" lineno="7" time="0.0014214515686035156" sim_time_ns="60.001" ratio_time="42211.07586447501">
+    <property name="random_seed" value="1666466801" />
+    <testcase name="run_test" classname="fir_direct_tb" file="/home/aortiz/DDA/codigos/GP02/ej4/sim/fir_direct_tb.py" lineno="7" time="18.998467683792114" sim_time_ns="50.0" ratio_time="2.631791196647705">
       <failure />
     </testcase>
   </testsuite>
