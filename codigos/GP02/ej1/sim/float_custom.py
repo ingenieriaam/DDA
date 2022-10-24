@@ -7,7 +7,7 @@ inf = -inf * -inf
 0.000000 = 0.000000 * 0.000000
 resto de los casos NaN
 """
-import numpy as np
+#import numpy as np
 import random
 
 def values_reference():
@@ -28,6 +28,8 @@ def bin2custom_float(num,exp_bits,mant_bits):
         float: float number
     """
     # string num to "bit" array
+
+    debug=0
     inf_exp  = [1 for i in range(exp_bits)]
     inf_mant = [0 for i in range(mant_bits)]
     nan_mant = [0 for i in range(mant_bits)]
@@ -43,9 +45,15 @@ def bin2custom_float(num,exp_bits,mant_bits):
 
     f_mant_array = [mantissa[i]*2**(-i-1) for i in range(len(mantissa))]
     f_mant       = sum(f_mant_array)
-    
-    f_exp_array  = [exponent[i]*2**(i) for i in range(len(exponent))]
-    f_exp        = sum(f_exp_array)-((2**exp_bits)/2)
+    l=len(exponent)
+    print("f_mant_array %f" %sum(f_mant_array)) if debug else 0
+    print("f_mant %f" %f_mant)                  if debug else 0
+
+    f_exp_array  = [exponent[l-1-i]*2**(i) for i in range(l)]
+    f_exp        = sum(f_exp_array)-(((2**exp_bits)/2)-1)
+
+    print("f_exp_array %f" %sum(f_exp_array))   if debug else 0
+    print("f_exp %f" %f_exp)                    if debug else 0
 
 
     if inf_exp==exponent and inf_mant==mantissa:
