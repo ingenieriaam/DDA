@@ -26,10 +26,10 @@ run_coco:
 	$(MAKE) -f $(shell cocotb-config --makefiles)/Makefile.sim SIM=$(SIM) TOPLEVEL_LANG=$(TOPLEVEL_LANG) VERILOG_SOURCES=$(VERILOG_SOURCES) TOPLEVEL=$(TOPLEVEL) MODULE=$(MODULE) COCOTB_LOG_LEVEL=$(LOG)
 
 waves:
-	gtkwave *.vcd $(GTK_ARGS)
+	gtkwave *.vcd $(GTK_ARGS) 
 
 clean:
-	rm -rf mydesign_synth *.vcd
+	rm -rf mydesign_synth *.vcd  ./sim_builds/ ./__pycache__/ results.xml
 
 help:
 	clear

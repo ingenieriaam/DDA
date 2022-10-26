@@ -1,5 +1,5 @@
 $date
-	Sun Oct 23 13:14:10 2022
+	Sun Oct 23 16:00:47 2022
 $end
 $version
 	Icarus Verilog
@@ -12,9 +12,15 @@ $var wire 1 ! clk $end
 $var wire 1 " i_rst $end
 $var wire 16 # i_x [15:0] $end
 $var wire 18 $ o_y [17:0] $end
-$var reg 32 % Mult_aux0 [31:0] $end
-$var reg 32 & Mult_aux1 [31:0] $end
-$var integer 32 ' idx [31:0] $end
+$var reg 32 % Temp_mul_0 [31:0] $end
+$var reg 32 & Temp_mul_1 [31:0] $end
+$var reg 32 ' Temp_mul_2 [31:0] $end
+$var reg 32 ( Temp_mul_3 [31:0] $end
+$var integer 32 ) idx [31:0] $end
+$scope begin Addition $end
+$upscope $end
+$scope begin Multiplication $end
+$upscope $end
 $scope begin coefficient_load $end
 $upscope $end
 $scope begin registers $end
@@ -23,35 +29,93 @@ $upscope $end
 $enddefinitions $end
 #0
 $dumpvars
-b11 '
-b0 &
-b0 %
+b0 )
+bx (
+bx '
+bx &
+bx %
 b0 $
 b0 #
 1"
 0!
 $end
 #5000
-b11 '
+b0 (
+b0 '
+b0 &
+b0 %
+b11 )
 1!
 #10000
 0!
 #15000
-b11 '
+b11 )
 1!
 #20000
 0!
 #25000
-b11 '
+b11 )
 1!
 #30000
 0!
 #35000
-b11 '
+b11 )
 1!
 #40000
 0!
 #45000
-b11 '
+b11 )
 1!
 #50000
+0"
+b1111111111111111 #
+0!
+#55000
+bx (
+b100 )
+1!
+#60000
+0!
+#65000
+bx $
+b0 (
+b11111111111111111111111111100010 %
+b100 )
+1!
+#70000
+0!
+#75000
+b0 $
+b11111111111111111011100101001010 &
+b100 )
+1!
+#80000
+0!
+#85000
+b11111111111111111011100101001010 '
+b100 )
+1!
+#90000
+0!
+#95000
+b1111111111111111 $
+b11111111111111111111111111100010 (
+b100 )
+1!
+#100000
+0!
+#105000
+b11111111111111110 $
+b100 )
+1!
+#110000
+0!
+#115000
+b100 )
+1!
+#120000
+0!
+#125000
+b100 )
+1!
+#130001

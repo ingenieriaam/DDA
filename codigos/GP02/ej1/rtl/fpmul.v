@@ -3,7 +3,7 @@
 //! @version 1.0
 //! @date 24/09/2022
 //!
-//! @brief Unsigned accumulator with adder input selection
+//! @brief Floating point multiplier that considers all of use, including NaN and infinities.
 //! @details Multiplier of values whose format is: 
 //!      
 //! |bits    |  12  |  [11:8]  |   [7:0]  |
@@ -32,7 +32,7 @@ module fpmul
     wire Sign;                    //! Calculation of sign of result
     reg         [7:0]  Mantissa ; //! Truncation of multiplication
     wire        [15:0] Mult_res ; //! Res of multiplication only
-    wire signed [4:0]  Sum_exp  ; //! Sum of exponent + bias
+    wire        [5:0]  Sum_exp  ; //! Sum of exponent + bias
     wire               Nan_check; //! Check if result must be NaN
     wire              Zero_check; //! Check if result must be zero
 
@@ -51,12 +51,16 @@ module fpmul
     //! Exponent
     assign Sum_exp   = i_data1[11:8] + i_data2[11:8] - `bias; 
 
+
     //! Nan check
     assign Nan_check = (i_data1==nan || i_data2==nan)              ? 1'b1 :
                        (i_data1[11:0]==inf && i_data2[11:0]==zero) ? 1'b1 :
                        (i_data2[11:0]==inf && i_data1[11:0]==zero) ? 1'b1 : 1'b0 ;
     //! Zero check
-    assign Zero_check= (i_data1[11:0]==zero || i_data2[11:0]==zero) ? 1'b1 : 1'b0 ;
+    assign Zero_check= (i_data1[11:0]==zero || i_data2[11:0]==zero) ? 1'b1 :
+                       (i_data1[11:8] + i_data2[11:8] < `bias)      ? 1'b1 : 1'b0 ;
+
+
 
     //! General operation
     always @(*) begin : exp_calc   
@@ -65,9 +69,13 @@ module fpmul
         // case zero
         else if (Zero_check)        o_mul <= {Sign,zero};         
         // normal operation
-        else if (Sum_exp[4])        o_mul <= {Sign,Sum_exp[3:0],Mantissa};
+        else if (~Sum_exp[4])       o_mul <= {Sign,Sum_exp[3:0],Mantissa};
         // +- inf
-        else                        o_mul <= {Sign,inf};
+
+        else if (Sum_exp[4])        o_mul <= {Sign,inf};
+
+        else                        o_mul <= nan;
+
     end
 
     /*===============*/

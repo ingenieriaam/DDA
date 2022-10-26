@@ -23,14 +23,16 @@ module fir_direct
     
     /*vars*/
     integer idx=0;
-    reg signed [15:0] i_h [NTAPS-1:0] ; 
-    reg [15:0] FiltReg    [NTAPS-2:0] ;
-    reg [31:0] Mult       [NTAPS-1:0] ;
-    reg [17:0] Sum        [NTAPS-1:0] ;
-    reg signed [31:0] Mult_aux        ;
+    reg signed [15:0] i_h        [NTAPS-1:0] ; 
+    reg signed [15:0] FiltReg    [NTAPS-2:0] ;
+    reg signed [31:0] Mult       [NTAPS-1:0] ;
+    reg signed [17:0] Sum        [NTAPS-1:0] ;
 
-    /*b = np.array([0,0,0,1])
-    a = np.array([1,-0.5,0.25,0.5])*/
+    reg signed [31:0] Temp_mul_0      ;
+    reg signed [31:0] Temp_mul_1      ;
+    reg signed [31:0] Temp_mul_2      ;
+    reg signed [31:0] Temp_mul_3      ;
+
     //! Hardcode coeff
     always @(negedge i_rst) begin: coefficient_load
         i_h[0]=16'h001e;
@@ -53,26 +55,45 @@ module fir_direct
             end
         end
     end
-    //! Addition and multiplication
-    always @(posedge clk ) begin
+
+    //! Multiplication
+    always @(posedge clk ) begin:Multiplication
         if(i_rst) begin
-            for(idx=1; idx<NTAPS-1; idx=idx+1) begin
-                Mult[idx] <={32'b0};
-                Sum [idx] <={18'b0};
+            for(idx=0; idx<NTAPS-1; idx=idx+1) begin
+                Mult[idx] <=0;
             end
-            Mult_aux <={32'b0};
         end 
         else begin
             Mult[0] <= i_h[0]*i_x;
-            Sum [0] <= Mult[0]; 
             for(idx=1; idx<NTAPS; idx=idx+1) begin
                 Mult[idx] <= i_h[idx]*FiltReg[idx-1];
-                Mult_aux  =  Mult[idx];
-                Sum [idx] <= Mult[idx][30:15]+Mult[idx-1][30:15];
             end
         end
     end
-    assign o_y = Mult_aux;
+
+    //! Addition
+    always @(posedge clk ) begin:Addition
+        if(i_rst) begin
+            for(idx=0; idx<NTAPS-1; idx=idx+1) begin
+               Sum [idx] <={18'b0};
+            end
+            Temp_mul_0  <= 0;
+            Temp_mul_1  <= 0;
+            Temp_mul_2  <= 0;
+            Temp_mul_3  <= 0;
+        end 
+        else begin
+            Temp_mul_0  <= Mult[0];
+            Temp_mul_1  <= Mult[1];
+            Temp_mul_2  <= Mult[2];
+            Temp_mul_3  <= Mult[3];
+            Sum[0]      <= Temp_mul_0[30:15];
+            Sum[1]      <= Temp_mul_1[30:15]+Temp_mul_0[30:15];
+            Sum[2]      <= Temp_mul_2[30:15]+Temp_mul_1[30:15];
+            Sum[3]      <= Temp_mul_3[30:15]+Temp_mul_2[30:15];
+        end
+    end
+    assign o_y = Sum[3];
 
     /*===============*/
     /* for cocotb sim*/

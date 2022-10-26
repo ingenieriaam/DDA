@@ -16,11 +16,14 @@ async def run_test(dut):
     await Timer(5*PERIOD, units='ns')
     dut.i_rst.value = 0
     dut._log.info("NTAPS: %d" %(dut.NTAPS.value))
-    for i in range(dut.NTAPS.value):
-        dut.i_x.value = 1
+    for i in range(dut.NTAPS.value*2):
+        dut.i_x.value =-1
         await Timer(PERIOD, units='ns')
-        dut._log.info("inter for...")
-        dut._log.info("Y @cycle %d = %f" %(i, (dut.o_y.value.signed_integer/2**15) ))
+        # check for another std values like X,U,Z.
+        if str(dut.o_y.value).isdigit():
+            dut._log.info("Y @cycle %d = %f" %(i, (dut.o_y.value.signed_integer/2**15) ))
+        else:
+            dut._log.info("Y @cycle %d = %s" %(i, dut.o_y.value ))
 
 
     
