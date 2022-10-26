@@ -4,7 +4,7 @@
 - **Author:** Agustin Matias Ortiz (aortiz@frba.utn.edu.ar)
 - **Version:** 1.0
 - **Date:** 24/09/2022
-- **Brief:** Unsigned accumulator with adder input selection
+- **Brief:** Floating point multiplier that considers all of use, including NaN and infinities.
 - **Details:** Multiplier of values whose format is: 
 ## Diagram
 
