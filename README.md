@@ -54,3 +54,7 @@ ex:
 # Notes:
 
 - [Class 1](https://onedrive.live.com/redir?resid=71656CC072A17A83%211909&authkey=%21AJVzlWE3PQHxBFE&page=Edit&wd=target%28DDA.one%7C1250178f-4834-44f4-b3ac-d37a29de5e78%2FClase%201%7Cf4623614-bb72-4b9a-b318-0e13ccdb7fc4%2F%29&wdorigin=703)
+
+## TODO:
+
+- Generate a generic sim_suport folder for entire project

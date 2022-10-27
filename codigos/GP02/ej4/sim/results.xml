@@ -1,6 +1,6 @@
 <testsuites name="results">
   <testsuite name="all" package="all">
-    <property name="random_seed" value="1666551646" />
-    <testcase name="run_test" classname="fir_direct_tb" file="/home/aortiz/DDA/codigos/GP02/ej4/sim/fir_direct_tb.py" lineno="7" time="0.0025267601013183594" sim_time_ns="130.001" ratio_time="51449.680534440464" />
+    <property name="random_seed" value="1666840945" />
+    <testcase name="run_test" classname="fir_direct_tb" file="/home/aortiz/DDA/codigos/GP02/ej4/sim/fir_direct_tb.py" lineno="10" time="0.2622718811035156" sim_time_ns="130.001" ratio_time="495.6726563786308" />
   </testsuite>
 </testsuites>

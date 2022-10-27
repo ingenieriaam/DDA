@@ -1,5 +1,5 @@
 $date
-	Sun Oct 23 16:00:47 2022
+	Thu Oct 27 00:22:26 2022
 $end
 $version
 	Icarus Verilog
@@ -19,11 +19,11 @@ $var reg 32 ( Temp_mul_3 [31:0] $end
 $var integer 32 ) idx [31:0] $end
 $scope begin Addition $end
 $upscope $end
+$scope begin Coefficient_load $end
+$upscope $end
 $scope begin Multiplication $end
 $upscope $end
-$scope begin coefficient_load $end
-$upscope $end
-$scope begin registers $end
+$scope begin Registers $end
 $upscope $end
 $upscope $end
 $enddefinitions $end

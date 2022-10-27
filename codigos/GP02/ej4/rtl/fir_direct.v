@@ -34,7 +34,7 @@ module fir_direct
     reg signed [31:0] Temp_mul_3      ;
 
     //! Hardcode coeff
-    always @(negedge i_rst) begin: coefficient_load
+    always @(posedge i_rst) begin: Coefficient_load
         i_h[0]=16'h001e;
         i_h[1]=16'h46b6;
         i_h[2]=16'h46b6;
@@ -42,7 +42,7 @@ module fir_direct
     end
 
     //! Performs a N taps filter
-    always @(posedge clk ) begin: registers
+    always @(posedge clk ) begin: Registers
         if(i_rst) begin
             for(idx=0; idx<NTAPS-1; idx=idx+1) begin
                 FiltReg[idx] <= zero;
