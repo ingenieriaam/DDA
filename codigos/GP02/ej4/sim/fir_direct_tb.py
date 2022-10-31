@@ -10,7 +10,7 @@ import numpy as np
 @cocotb.test()
 async def run_test(dut):
     PERIOD = 10
-    cocotb.fork(Clock(dut.clk, PERIOD, 'ns').start(start_high=False))
+    cocotb.fork(Clock(dut.clk, PERIOD, 'ns').start(start_high=True))
 
     dut.o_y.value = 0
     dut.i_x.value = 0
@@ -19,6 +19,7 @@ async def run_test(dut):
     await Timer(5*PERIOD, units='ns')
 
     dut.i_rst.value = 0
+    await Timer(PERIOD, units='ns')
     dut._log.info("NTAPS: %d" %(dut.NTAPS.value))
     x=np.array([-1., -1., -1., -1., -1., -1., -1., -1.])
     h=np.array([float(dut.i_h[0].value),float(dut.i_h[1].value),float(dut.i_h[2].value),float(dut.i_h[3].value)])

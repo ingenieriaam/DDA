@@ -57,7 +57,7 @@ module fir_direct
     end
 
     //! Multiplication
-    always @(posedge clk ) begin:Multiplication
+    always @(posedge clk ) begin:Multiplication // it's ok
         if(i_rst) begin
             for(idx=0; idx<NTAPS-1; idx=idx+1) begin
                 Mult[idx] <=0;
