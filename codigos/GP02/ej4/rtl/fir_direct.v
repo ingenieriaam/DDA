@@ -26,19 +26,21 @@ module fir_direct
     reg signed [15:0] i_h        [NTAPS-1:0] ; 
     reg signed [15:0] FiltReg    [NTAPS-2:0] ;
     reg signed [31:0] Mult       [NTAPS-1:0] ;
-    reg signed [17:0] Sum        [NTAPS-1:0] ;
+    wire signed [17:0] Sum        [NTAPS-2:0] ;
 
-    reg signed [31:0] Temp_mul_0      ;
-    reg signed [31:0] Temp_mul_1      ;
-    reg signed [31:0] Temp_mul_2      ;
-    reg signed [31:0] Temp_mul_3      ;
+    wire signed [31:0] Temp_mul_0      ;
+    wire signed [31:0] Temp_mul_1      ;
+    wire signed [31:0] Temp_mul_2      ;
+    wire signed [31:0] Temp_mul_3      ;
 
     //! Hardcode coeff
     always @(posedge i_rst) begin: Coefficient_load
-        i_h[0]=16'h001e;
-        i_h[1]=16'h46b6;
-        i_h[2]=16'h46b6;
-        i_h[3]=16'h001e;     
+        i_h[0]=16'h8000;
+        i_h[1]=16'h8000;
+        i_h[2]=16'h8000;
+        /* i_h[1]=16'h46b6;
+        i_h[2]=16'h46b6; */
+        i_h[3]=16'h8000;     
     end
 
     //! Performs a N taps filter
@@ -72,29 +74,15 @@ module fir_direct
     end
 
     //! Addition
-    always @(posedge clk ) begin:Addition
-        if(i_rst) begin
-            for(idx=0; idx<NTAPS-1; idx=idx+1) begin
-               Sum [idx] <={18'b0};
-            end
-            Temp_mul_0  <= 0;
-            Temp_mul_1  <= 0;
-            Temp_mul_2  <= 0;
-            Temp_mul_3  <= 0;
-        end 
-        else begin
-            Temp_mul_0  <= Mult[0];
-            Temp_mul_1  <= Mult[1];
-            Temp_mul_2  <= Mult[2];
-            Temp_mul_3  <= Mult[3];
-            Sum[0]      <= Temp_mul_0[30:15];
-            Sum[1]      <= Temp_mul_1[30:15]+Temp_mul_0[30:15];
-            Sum[2]      <= Temp_mul_2[30:15]+Temp_mul_1[30:15];
-            Sum[3]      <= Temp_mul_3[30:15]+Temp_mul_2[30:15];
-        end
-    end
-    assign o_y = Sum[3];
-
+    assign Temp_mul_0   = Mult[0];
+    assign Temp_mul_1   = Mult[1];
+    assign Temp_mul_2   = Mult[2];
+    assign Temp_mul_3   = Mult[3];
+    assign Sum[0]       = {Temp_mul_0[30],Temp_mul_0[30],Temp_mul_0[30:15]};
+    assign Sum[1]       = {Temp_mul_1[30],Temp_mul_1[30],Temp_mul_1[30:15]}+Sum[0];
+    assign Sum[2]       = {Temp_mul_2[30],Temp_mul_2[30],Temp_mul_2[30:15]}+Sum[1];
+    assign o_y          = {Temp_mul_3[30],Temp_mul_3[30],Temp_mul_3[30:15]}+Sum[2];
+ 
     /*===============*/
     /* for cocotb sim*/
     /*===============*/

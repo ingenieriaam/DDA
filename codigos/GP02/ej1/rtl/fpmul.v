@@ -3,7 +3,7 @@
 //! @version 1.0
 //! @date 24/09/2022
 //!
-//! @brief Floating point multiplier that considers all of use, including NaN and infinities.
+//! @brief Unsigned accumulator with adder input selection
 //! @details Multiplier of values whose format is: 
 //!      
 //! |bits    |  12  |  [11:8]  |   [7:0]  |

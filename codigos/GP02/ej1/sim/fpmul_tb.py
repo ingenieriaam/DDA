@@ -78,13 +78,13 @@ async def random_values(dut):
     inputs =[]
 
     # Number of iterations
-    n_cases=5
+    n_cases=15
 
     # Number of bits
     n_bits=13
     
-    lower_limit=0.9
-    upper_limit=1.1
+    lower_limit=0.85
+    upper_limit=1.15
 
     for i in range(n_cases):
 
@@ -93,7 +93,7 @@ async def random_values(dut):
         #zero_negative_limit =-6.103515625e-05 #100000000001
         #zero_positive_limit = 6.103515625e-05 #000000000001
         singular_float=[float('nan'),float('inf'),-1.0*float('inf'),0.0,-0.0]
-
+ 
 
     for i in range(len(inputs)):
         for j in range(len(inputs)):

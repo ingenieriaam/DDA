@@ -1,9 +1,9 @@
 <testsuites name="results">
   <testsuite name="all" package="all">
-    <property name="random_seed" value="1666826157" />
-    <testcase name="singular_values" classname="fpmul_tb" file="/home/aortiz/DDA/codigos/GP02/ej1/sim/fpmul_tb.py" lineno="18" time="0.007340669631958008" sim_time_ns="450.001" ratio_time="61302.445493650324" />
-    <testcase name="extreme_values" classname="fpmul_tb" file="/home/aortiz/DDA/codigos/GP02/ej1/sim/fpmul_tb.py" lineno="41" time="0.0017848014831542969" sim_time_ns="230.00099999999998" ratio_time="128866.43258135184" />
-    <testcase name="random_values" classname="fpmul_tb" file="/home/aortiz/DDA/codigos/GP02/ej1/sim/fpmul_tb.py" lineno="73" time="0.0023810863494873047" sim_time_ns="230.0010000000001" ratio_time="96594.98491078406">
+    <property name="random_seed" value="1667426624" />
+    <testcase name="singular_values" classname="fpmul_tb" file="/home/aortiz/DDA/codigos/GP02/ej1/sim/fpmul_tb.py" lineno="18" time="0.007435321807861328" sim_time_ns="450.001" ratio_time="60522.060998653236" />
+    <testcase name="extreme_values" classname="fpmul_tb" file="/home/aortiz/DDA/codigos/GP02/ej1/sim/fpmul_tb.py" lineno="41" time="0.00514531135559082" sim_time_ns="230.00099999999998" ratio_time="44701.08494990964" />
+    <testcase name="random_values" classname="fpmul_tb" file="/home/aortiz/DDA/codigos/GP02/ej1/sim/fpmul_tb.py" lineno="73" time="0.03800392150878906" sim_time_ns="760.001" ratio_time="19997.962574052697">
       <failure />
     </testcase>
   </testsuite>
