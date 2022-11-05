@@ -1,0 +1,4 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/LENOVO/Desktop/DDA/verilog_tests/compuertas/compuertasLogicas.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module compuertasLogicas
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/LENOVO/Desktop/DDA/verilog_tests/compuertas/compuertasLogicas_tb.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module compuertasLogicas_tb

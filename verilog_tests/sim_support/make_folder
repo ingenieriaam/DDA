@@ -1,9 +1,0 @@
-#make -f make_folder proj=nombre
-proj ?= entity
-all:
-	$(shell mkdir -p $(proj))
-	$(shell mkdir -p $(proj)/rtl)
-	$(shell mkdir -p $(proj)/sim)
-	$(shell mkdir -p $(proj)/xtras)
-	$(shell ln -s ../sim_support/Makefile $(proj)/Makefile)
-	@echo "Estructura creada"

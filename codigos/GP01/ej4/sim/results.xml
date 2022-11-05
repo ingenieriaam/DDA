@@ -1,6 +1,0 @@
-<testsuites name="results">
-  <testsuite name="all" package="all">
-    <property name="random_seed" value="1664060179" />
-    <testcase name="trivial_test" classname="diffeq_tb" file="/home/aortiz/DDA/codigos/GP01/ej4/sim/diffeq_tb.py" lineno="20" time="0.01280832290649414" sim_time_ns="840.001" ratio_time="65582.43465068315" />
-  </testsuite>
-</testsuites>

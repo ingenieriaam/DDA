@@ -1,0 +1,4 @@
+Running: xsim.dir/compuertasLogicas_tb_behav/xsimk.exe -simmode gui -wdb compuertasLogicas_tb_behav.wdb -simrunnum 0 -socket 50837
+Design successfully loaded
+Design Loading Memory Usage: 6136 KB (Peak: 6136 KB)
+Design Loading CPU Usage: 77 ms

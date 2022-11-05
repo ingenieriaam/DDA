@@ -1,9 +1,0 @@
-<testsuites name="results">
-  <testsuite name="all" package="all">
-    <property name="random_seed" value="1664064054" />
-    <testcase name="one_increment_sel0" classname="uns_acc_tb" file="/home/aortiz/DDA/codigos/GP01/ej1/sim/uns_acc_tb.py" lineno="29" time="0.018991470336914062" sim_time_ns="3380.001" ratio_time="177974.6875854173" />
-    <testcase name="random_increment_sel1" classname="uns_acc_tb" file="/home/aortiz/DDA/codigos/GP01/ej1/sim/uns_acc_tb.py" lineno="56" time="0.02323150634765625" sim_time_ns="3360.2569999999996" ratio_time="144642.23497668307" />
-    <testcase name="random_increment_sel2" classname="uns_acc_tb" file="/home/aortiz/DDA/codigos/GP01/ej1/sim/uns_acc_tb.py" lineno="87" time="0.021787643432617188" sim_time_ns="3360.2569999999996" ratio_time="154227.64790475354" />
-    <testcase name="null_increment_sel3" classname="uns_acc_tb" file="/home/aortiz/DDA/codigos/GP01/ej1/sim/uns_acc_tb.py" lineno="117" time="0.023797988891601562" sim_time_ns="3360.2570000000014" ratio_time="141199.2002898133" />
-  </testsuite>
-</testsuites>

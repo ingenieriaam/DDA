@@ -1,7 +1,0 @@
-Running: xsim.dir/compuertasLogicas_behav/xsimk.exe -simmode gui -wdb compuertasLogicas_behav.wdb -simrunnum 0 -socket 64861
-Design successfully loaded
-Design Loading Memory Usage: 6136 KB (Peak: 6136 KB)
-Design Loading CPU Usage: 15 ms
-Simulation completed
-Simulation Memory Usage: 6708 KB (Peak: 6708 KB)
-Simulation CPU Usage: 15 ms

@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1667680865" />
+    <testcase name="fixed_values_test" classname="fir_direct_tb" file="/home/aortiz/DDA/codigos/GP02/ej4/sim/fir_direct_tb.py" lineno="26" time="0.27750635147094727" sim_time_ns="140.001" ratio_time="504.4965610981953" />
+  </testsuite>
+</testsuites>
