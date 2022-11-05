@@ -1,15 +1,29 @@
-// utility site: https://chummersone.github.io/qformat.html
-//               http://t-filter.engineerjs.com/
-//               http://www.fdi.ucm.es/profesor/mendias/das/docs/DAStema6.pdf
-//               https://www.airsupplylab.com/verilog-fpga/83-fpga-lesson-04-verilog-scalar,-vector,-and-array.html#arrays
+//! @title Semi-generic FIR filter
+//! @author Agustin Matias Ortiz (aortiz@frba.utn.edu.ar)
+//! @version 1.0
+//! @date 01/11/2022
+//!
+//! @brief 4 TAPS FIR filter
+//! @details Although it is strictly a 4-stage transposed FIR, it is described in 
+//! such a way that it is easily scalable to more stages, however, the coefficients are imposed in the design. 
+//!
+//! ### utility site: 
+//!
+//! - https://chummersone.github.io/qformat.html 
+//!
+//! - http://t-filter.engineerjs.com/
+//!
+//! - http://www.fdi.ucm.es/profesor/mendias/das/docs/DAStema6.pdf
+//!
+//! - https://www.airsupplylab.com/verilog-fpga/83-fpga-lesson-04-verilog-scalar,-vector,-and-array.html#arrays
 `define COCOTB_SIM 1
 
 module fir_direct 
 #(
-    parameter NTAPS = 4
+    parameter NTAPS = 4                       //! Filter stages
 ) 
 (
-    output     signed [17:0] o_y            , //! output register
+    output     signed [17:0] o_y            , //! Output signal
 
     input      signed [15:0] i_x            , //! Input signal 
     
@@ -18,22 +32,22 @@ module fir_direct
     );
     //-----------arch-----------
 
-    localparam  [15:0] zero        = {{16{1'b0}}};//! Zeros 
-    localparam  [15:0] ones        = {{16{1'b1}}};//! Ones
+    localparam  [15:0] zero    = {{16{1'b0}}} ;   //! Zeros 
     
-    /*vars*/
-    integer idx=0;
-    reg signed [15:0] i_h        [NTAPS-1:0] ; 
-    reg signed [15:0] FiltReg    [NTAPS-2:0] ;
-    reg signed [31:0] Mult       [NTAPS-1:0] ;
-    wire signed [17:0] Sum        [NTAPS-2:0] ;
+    //! generics vars
+    integer     idx=0                         ;   //! Index for generic processes
+    reg signed  [15:0] i_h        [NTAPS-1:0] ;   //! Coefficients array
+    reg signed  [15:0] FiltReg    [NTAPS-2:0] ;   //! Filter registers array
+    reg signed  [31:0] Mult       [NTAPS-1:0] ;   //! Multiplier registers array
+    wire signed [17:0] Sum        [NTAPS-2:0] ;   //! Adder results array
+    
+    //! simples vars
+    wire signed [31:0] Temp_mul_0             ;   //! Auxiliary vector for clipping truncation of the multiplier 
+    wire signed [31:0] Temp_mul_1             ;   //! Auxiliary vector for clipping truncation of the multiplier
+    wire signed [31:0] Temp_mul_2             ;   //! Auxiliary vector for clipping truncation of the multiplier
+    wire signed [31:0] Temp_mul_3             ;   //! Auxiliary vector for clipping truncation of the multiplier
 
-    wire signed [31:0] Temp_mul_0      ;
-    wire signed [31:0] Temp_mul_1      ;
-    wire signed [31:0] Temp_mul_2      ;
-    wire signed [31:0] Temp_mul_3      ;
-
-    //! Hardcode coeff
+    //! Hardcode coeff load to register
     always @(posedge i_rst) begin: Coefficient_load
         i_h[0]=16'h8000;
         i_h[1]=16'h8000;
@@ -43,7 +57,7 @@ module fir_direct
         i_h[3]=16'h8000;     
     end
 
-    //! Performs a N taps filter
+    //! Generic load of registers
     always @(posedge clk ) begin: Registers
         if(i_rst) begin
             for(idx=0; idx<NTAPS-1; idx=idx+1) begin
@@ -58,8 +72,8 @@ module fir_direct
         end
     end
 
-    //! Multiplication
-    always @(posedge clk ) begin:Multiplication // it's ok
+    //! Generic multiplication
+    always @(posedge clk ) begin:Multiplication 
         if(i_rst) begin
             for(idx=0; idx<NTAPS-1; idx=idx+1) begin
                 Mult[idx] <=0;
