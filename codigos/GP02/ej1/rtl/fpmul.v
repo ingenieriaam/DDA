@@ -32,7 +32,7 @@ module fpmul
     wire Sign;                    //! Calculation of sign of result
     reg         [7:0]  Mantissa ; //! Truncation of multiplication
     wire        [15:0] Mult_res ; //! Res of multiplication only
-    wire        [5:0]  Sum_exp  ; //! Sum of exponent + bias
+    wire        [5:0]  Sum_exp  ; //! Sum of exponent - bias
     wire               Nan_check; //! Check if result must be NaN
     wire              Zero_check; //! Check if result must be zero
 
