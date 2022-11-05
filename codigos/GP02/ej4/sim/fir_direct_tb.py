@@ -3,6 +3,7 @@ import cocotb
 from cocotb.clock import Clock
 from cocotb.triggers import Timer
 from cocotb.regression import TestFactory
+import cocotb.wavedrom
 
 import scipy as sp
 import numpy as np
@@ -10,15 +11,23 @@ import numpy as np
 bits = 16
 rang = 2**(bits-1)
 
-@cocotb.test()
-async def run_test(dut):
-    PERIOD = 10
+def init_test(title,dut,PERIOD):
+    decorator = "="*( len(title) + 2 )
+    dut._log.info("\n\t +"+decorator+"+")    
+    dut._log.info("\t | "+title+" |")    
+    dut._log.info("\t +"+decorator+"+\n")    
     cocotb.fork(Clock(dut.clk, PERIOD, 'ns').start(start_high=True))
 
     dut.o_y.value = 0
     dut.i_x.value = 0
     dut.i_rst.value = 1 
+    return PERIOD
 
+@cocotb.test()
+async def fixed_values_test(dut):
+
+    PERIOD = 10
+    init_test("Testing of output values with fixed input",dut,PERIOD)
     await Timer(5*PERIOD, units='ns')
 
     dut.i_rst.value = 0
@@ -34,8 +43,6 @@ async def run_test(dut):
 
     # reference filtering
     y2=sp.signal.lfilter(h,a,x)
-    dut._log.info("differential eq output:")
-    dut._log.info(y2)
     o_y=[]
     
     # test
@@ -53,6 +60,8 @@ async def run_test(dut):
             dut._log.debug("Y @cycle %d = %s" %(i, dut.o_y.value ))
             assert False, "Result was not a number"
 
+    dut._log.info("Differential eq output:")
+    dut._log.info(y2)
     dut._log.info("DUT output:")
     dut._log.info(o_y)
 
